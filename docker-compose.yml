@@ -1,0 +1,27 @@
+version: "3.5"
+services:
+  server:
+    container_name: server_logviewer
+    build:
+      context: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    links:
+      - postgres
+
+  postgres:
+    container_name: postgres_logviewer
+    image: "postgres:alpine"
+    environment:
+      - POSTGRES_USER=logger
+      - POSTGRES_PASSWORD=testpass
+      - POSTGRES_DB=logger
+    volumes:
+      - postgres:/data/postgres
+    ports:
+      - "54325:5432"
+
+volumes:
+  postgres:
