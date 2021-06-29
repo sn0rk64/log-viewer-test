@@ -53,6 +53,7 @@ func runMigrate(db *sqlx.DB) error {
 		
 		CREATE INDEX ts_index on logs (ts);
 		CREATE INDEX ts_type_index on logs(ts,type);
+		CREATE INDEX id_type_index on logs(id,type);
 		`
 		_, err := db.Exec(query)
 		if err != nil {
